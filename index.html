@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人学术主页 - 医学影像研究</title>
+    <!-- 引入Tailwind CSS（免写复杂CSS，快速美化） -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入图标库（增强视觉） -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        /* 仅补充少量自定义样式，核心样式靠Tailwind */
+        .nav-scroll { transition: background-color 0.3s, box-shadow 0.3s; }
+        .card-hover { transition: transform 0.3s, box-shadow 0.3s; }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); }
+        .graph-node { cursor: pointer; }
+        .graph-node:hover .node-content { opacity: 1; transform: translateY(0); }
+        .node-content { opacity: 0; transform: translateY(10px); transition: all 0.3s; }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+    <!-- 导航条（加分项，滚动变色JS效果） -->
+    <nav id="main-nav" class="nav-scroll fixed w-full top-0 z-50 bg-white/90 backdrop-blur-sm shadow-sm">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href=" " class="text-xl font-bold text-blue-600 flex items-center">
+                <<i class="fa fa-user-md mr-2"></</i>医学影像研究
+            </a >
+            <div class="hidden md:flex space-x-6">
+                首页
+                个人简介
+                知识图谱
+                联系方式
+            </div>
+            <!-- 移动端菜单按钮 -->
+            <button class="md:hidden text-gray-700" id="menu-btn">
+                <<i class="fa fa-bars text-xl"></</i>
+            </button>
+        </div>
+        <!-- 移动端菜单（JS展开收起） -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-md px-4 py-2">
+            首页
+            个人简介
+            知识图谱
+            联系方式
+        </div>
+    </nav>
+
+    <!-- 首页横幅 -->
+    <section id="home" class="pt-28 pb-16 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 text-gray-900">医学影像与人工智能研究</h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">专注超声成像技术、临床应用与知识图谱构建</p >
+            <a href="#knowledge" class="mt-8 inline-block bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl">
+                查看知识图谱 <<i class="fa fa-arrow-right ml-2"></</i>
+            </a >
+        </div>
+    </section>
+
+    <!-- 个人简介（含照片，JS淡入效果） -->
+    <section id="about" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-900">个人简介</h2>
+            <div class="flex flex-col md:flex-row items-center max-w-4xl mx-auto gap-8">
+                <!-- 个人照片（JS hover放大效果） -->
+                <div class="w-64 h-64 rounded-full overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
+                    < img src="photo.jpg" alt="个人照片" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="text-lg text-gray-700 space-y-4">
+                    <p>您好！我是一名医学影像专业研究者，主要专注于<span class="text-blue-600 font-semibold">超声成像技术</span>的基础理论、设备研发与临床应用研究。</p >
+                    <p>研究方向包括：超声图像去噪与增强、超声弹性成像、介入超声引导技术、多模态影像融合等。</p >
+                    <p>致力于通过技术创新提升医学影像的诊断精度与临床实用性，推动人工智能在超声影像中的落地应用。</p >
+                    <div class="flex space-x-4 mt-6">
+                        <a href="#contact" class="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition-colors">
+                            <<i class="fa fa-envelope mr-2"></</i>联系我
+                        </a >
+                        <a href="#knowledge" class="bg-gray-200 text-gray-800 px-4 py-2 rounded-full hover:bg-gray-300 transition-colors">
+                            <<i class="fa fa-book mr-2"></</i>知识图谱
+                        </a >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 医学影像知识图谱（核心要求，超声成像方向） -->
+    <section id="knowledge" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-900">超声成像知识图谱</h2>
+            <div class="max-w-5xl mx-auto">
+                <!-- 图谱说明 -->
+                <p class="text-center text-gray-600 mb-10">以下为超声成像核心知识体系，点击/hover节点查看详情</p >
+                
+                <!-- 知识图谱可视化（纯HTML/CSS模拟，JS交互效果） -->
+                <div class="relative h-[500px] bg-white rounded-xl shadow-lg p-4 md:p-8 overflow-hidden">
+                    <!-- 中心节点 -->
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-blue-600 rounded-full flex flex-col items-center justify-center text-white shadow-xl">
+                        <<i class="fa fa-ultrasound text-4xl mb-2"></</i>
+                        <span class="font-bold text-lg">超声成像</span>
+                    </div>
+
+                    <!-- 子节点1：基础原理 -->
+                    <div class="graph-node absolute top-1/4 left-1/4 w-32 h-32 bg-blue-100 rounded-full flex flex-col items-center justify-center shadow-md">
+                        <<i class="fa fa-wave-square text-2xl text-blue-600 mb-1"></</i>
+                        <span class="font-semibold">基础原理</span>
+                        <div class="node-content absolute bottom-[-100px] left-1/2 -translate-x-1/2 bg-white p-3 rounded-lg shadow-lg w-48 text-sm">
+                            声波反射/折射、压电效应、声阻抗匹配、脉冲回声技术
+                        </div>
+                    </div>
+
+                    <!-- 子节点2：核心技术 -->
+                    <div class="graph-node absolute top-1/4 right-1/4 w-32 h-32 bg-blue-100 rounded-full flex flex-col items-center justify-center shadow-md">
+                        <<i class="fa fa-cogs text-2xl text-blue-600 mb-1"></</i>
+                        <span class="font-semibold">核心技术</span>
+                        <div class="node-content absolute bottom-[-100px] left-1/2 -translate-x-1/2 bg-white p-3 rounded-lg shadow-lg w-48 text-sm">
+                            B超、M超、Doppler超声、3D/4D超声、弹性成像、造影增强
+                        </div>
+                    </div>
+
+                    <!-- 子节点3：临床应用 -->
+                    <div class="graph-node absolute bottom-1/4 left-1/4 w-32 h-32 bg-blue-100 rounded-full flex flex-col items-center justify-center shadow-md">
+                        <<i class="fa fa-stethoscope text-2xl text-blue-600 mb-1"></</i>
+                        <span class="font-semibold">临床应用</span>
+                        <div class="node-content absolute top-[-100px] left-1/2 -translate-x-1/2 bg-white p-3 rounded-lg shadow-lg w-48 text-sm">
+                            腹部超声、心血管超声、妇产科超声、乳腺超声、介入超声引导
+                        </div>
+                    </div>
+
+                    <!-- 子节点4：设备组成 -->
+                    <div class="graph-node absolute bottom-1/4 right-1/4 w-32 h-32 bg-blue-100 rounded-full flex flex-col items-center justify-center shadow-md">
+                        <<i class="fa fa-medkit text-2xl text-blue-600 mb-1"></</i>
+                        <span class="font-semibold">设备组成</span>
+                        <div class="node-content absolute top-[-100px] left-1/2 -translate-x-1/2 bg-white p-3 rounded-lg shadow-lg w-48 text-sm">
+                            超声探头、发射/接收电路、信号处理模块、显示终端、电源系统
+                        </div>
+                    </div>
+
+                    <!-- 连接线（纯CSS绘制） -->
+                    <div class="absolute top-1/2 left-1/2 w-[200px] h-[2px] bg-blue-200 -rotate-45 origin-left"></div>
+                    <div class="absolute top-1/2 left-1/2 w-[200px] h-[2px] bg-blue-200 rotate-45 origin-left"></div>
+                    <div class="absolute top-1/2 left-1/2 w-[200px] h-[2px] bg-blue-200 -rotate-135 origin-left"></div>
+                    <div class="absolute top-1/2 left-1/2 w-[200px] h-[2px] bg-blue-200 rotate-135 origin-left"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系方式 -->
+    <section id="contact" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-900">联系方式</h2>
+            <div class="max-w-2xl mx-auto bg-blue-50 rounded-xl p-8 shadow-md">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="flex-1">
+                        <h3 class="text-xl font-semibold mb-4 text-blue-700">欢迎交流</h3>
+                        <p class="text-gray-700 mb-6">如果您对超声成像、医学影像知识图谱有兴趣，或有合作意向，欢迎通过以下方式联系我！</p >
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <<i class="fa fa-envelope text-blue-600 text-xl w-8"></</i>
+                                <span class="text-gray-700">jiankangsun471@163.com</span>
+                            </div>
+                            <div class="flex items-center">
+                                <<i class="fa fa-github text-blue-600 text-xl w-8"></</i>
+                                <span class="text-gray-700">github.com/folyre</span>
+                            </div>
+                            <div class="flex items-center">
+                                <<i class="fa fa-lab text-blue-600 text-xl w-8"></</i>
+                                <span class="text-gray-700">天津医科大学 医学影像实验室</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <form class="space-y-4">
+                            <div>
+                                <label class="block text-gray-700 mb-2" for="name">姓名</label>
+                                <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="您的姓名">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2" for="email">邮箱</label>
+                                <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="您的邮箱">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2" for="message">留言</label>
+                                <textarea id="message" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="您的留言"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
+                                发送留言 <<i class="fa fa-paper-plane ml-2"></</i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-4">© 2025 医学影像研究个人主页 | 基于GitHub Pages构建</p >
+            <div class="flex justify-center space-x-6">
+                <<i class="fa fa-github text-xl"></</i>
+                <<i class="fa fa-linkedin text-xl"></</i>
+                <<i class="fa fa-researchgate text-xl"></</i>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS动态效果（加分项，极简逻辑） -->
+    <script>
+        // 1. 导航条滚动变色
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('main-nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-white', 'shadow');
+                nav.classList.remove('bg-white/90');
+            } else {
+                nav.classList.add('bg-white/90');
+                nav.classList.remove('bg-white', 'shadow');
+            }
+        });
+
+        // 2. 移动端菜单展开/收起
+        document.getElementById('menu-btn').addEventListener('click', () => {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 3. 平滑滚动（导航跳转）
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                // 关闭移动端菜单
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // 4. 页面加载时淡入效果
+        window.addEventListener('load', () => {
+            document.querySelectorAll('section').forEach((section, index) => {
+                setTimeout(() => {
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+        });
+
+        // 初始设置section样式（用于淡入效果）
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.5s, transform 0.5s';
+        });
+    </script>
+</body>
+</html>
