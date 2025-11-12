@@ -21,8 +21,26 @@
         .section-title { text-align: center; font-size: 1.8rem; color: #2c3e50; margin-bottom: 40px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
         /* 个人简介（含照片，布局稳定） */
         .about-content { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 50px; }
-        .profile-photo { width: 220px; height: 220px; border-radius: 50%; overflow: hidden; border: 5px solid #f1f5f9; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .profile-photo img { width: 100%; height: 100%; object-fit: contain; object-position: center; }
+        /* 方形头像，强对比，适配你的证件照比例 */
+.profile-photo { 
+    width: 240px; 
+    height: 320px; /* 匹配你600×800的证件照比例（3:4） */
+    overflow: hidden; 
+    border: 8px solid #2c3e50; /* 深色粗边框，和白底反差大 */
+    background: #ffeeee; /* 浅红背景，彻底避免融合 */
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.profile-photo img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: contain; /* 完整显示你的证件照，不裁剪 */
+    object-position: center;
+    background: #fff;
+    padding: 10px;
+}
         .profile-info { max-width: 700px; }
         .profile-info h3 { font-size: 1.3rem; color: #3498db; margin: 15px 0; }
         .profile-info p { margin: 8px 0; }
@@ -79,7 +97,10 @@
             <div class="about-content">
                 <div class="profile-photo">
                     <!-- 替换为你的图片链接（直接粘贴图床/仓库Raw链接） -->
-                    <!-- <img src="https://www.imgur.la/image/photo.6RmuEw" alt="JK 个人照片"> -->
+                   <div class="profile-photo">
+    <!-- 已帮你提取正确的直接图片链接，不用改！ -->
+    < img src="https://www.imgur.la/images/2025/11/13/photo.jpg" alt="JK 证件照" onerror="this.src='https://picsum.photos/240/320'; this.alt='备用图片'">
+</div>
                 </div>
                 <div class="profile-info">
                     <h3>基本信息</h3>
