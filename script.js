@@ -1,27 +1,29 @@
-// 等待页面加载完毕
-document.addEventListener('DOMContentLoaded', function() {
-    const navLinks = document.querySelectorAll('.navbar a');
+// 1. 导航条滚动变色（动态效果）
+window.addEventListener('scroll', function() {
+    const navbar = document.getElementById('navbar');
+    if (window.scrollY > 50) {
+        navbar.style.backgroundColor = '#1a2530'; // 滚动后变深
+    } else {
+        navbar.style.backgroundColor = '#2c3e50'; // 初始颜色
+    }
+});
 
-    // 为每个导航链接添加平滑滚动效果
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault(); // 阻止默认跳转
-            const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-            // 平滑滚动到目标区域
-            targetSection.scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    });
+// 2. 个人照片hover放大（动态效果）
+const profilePhoto = document.querySelector('.profile-photo');
+profilePhoto.addEventListener('mouseenter', function() {
+    this.style.transform = 'scale(1.1)'; // 放大1.1倍
+});
+profilePhoto.addEventListener('mouseleave', function() {
+    this.style.transform = 'scale(1)'; // 恢复原大小
+});
 
-    // 简单的导航栏高亮效果（可根据需要扩展更复杂的效果）
-    navLinks.forEach(link => {
-        link.addEventListener('mouseenter', function() {
-            this.style.backgroundColor = '#575757';
-        });
-        link.addEventListener('mouseleave', function() {
-            this.style.backgroundColor = '';
+// 3. 平滑滚动（点击导航跳转无卡顿）
+document.querySelectorAll('#navbar a').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        document.querySelector(targetId).scrollIntoView({
+            behavior: 'smooth'
         });
     });
 });
